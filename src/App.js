@@ -86,11 +86,12 @@ function App() {
     console.log(topTracks);
     if (token && displayTracks) {
       return <div id='top-track-display'>
+        <h1 id='top5_title'>ur top five</h1>
         {topTracks.map(track => {
-          return <div key={track.id}>
+          return <div className='track_wrapper' key={track.id}>
  
-            <h2>{track.name}</h2>
-            {track.artists ? <p>{track.artists[0].name}</p> : <p>no artist listed</p>}
+            <h2 className='track_name'>{track.name}</h2>
+            {track.artists ? <p className='track_artist'>{track.artists[0].name}</p> : <p>no artist listed</p>}
             { track.album ? 
             <img src={track.album.images[0].url} height={'150px'} width={'150px'}/> 
               
@@ -110,22 +111,23 @@ function App() {
 
   return (
     <div className="App">
+      <div className='auth_stuff'>
       <h1>Welcome</h1>
       {!token ?
-        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
+        <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
 
-        : <button onClick={logout}>Logout</button>
+        : <button id='logoutBtn' onClick={logout}>Logout</button>
       }
-
       {
         token ?
-          <div>
+        <div>
             <button onClick={() => getTopTracks()}>get my top tracks</button>
           </div>
           : <div>
             <h3>pls login</h3>
           </div>
       }
+      </div>
       {renderTracks()}
     </div>
 
