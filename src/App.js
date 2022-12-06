@@ -14,6 +14,7 @@ function App() {
   const [searchKey, setSearchKey] = useState("");
   const [artists, setArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([{}]);
+  const [displayTracks, setDisplayTracks] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -25,6 +26,7 @@ function App() {
 
       window.location.hash = "";
       window.localStorage.setItem("token", token)
+      // setDisplayTracks(false)
     }
 
     setToken(token)
@@ -63,31 +65,45 @@ function App() {
   // }
 
   const getTopTracks = async () => {
+    setDisplayTracks(true)
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
         limit: 5,
         time_range: 'short_term'
 
       },
-        headers: {
-            'Accept': "application/json",
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-        }
+      headers: {
+        'Accept': "application/json",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
     })
     setTopTracks(data.items)
-    console.log(topTracks)
+    // console.log(topTracks)
   }
 
   const renderTracks = () => {
     console.log(topTracks);
-    return     <div id='top-track-display'>
-    {topTracks.map(track => {
-      return <div key={track.id}>
-        <h2>{track.name}</h2>
+    if (token && displayTracks) {
+      return <div id='top-track-display'>
+        {topTracks.map(track => {
+          return <div key={track.id}>
+ 
+            <h2>{track.name}</h2>
+            {track.artists ? <p>{track.artists[0].name}</p> : <p>no artist listed</p>}
+            { track.album ? 
+            <img src={track.album.images[0].url} height={'150px'} width={'150px'}/> 
+              
+            : <p>no image to display</p>
+          }
+
+          </div>
+
+        
+        })
+      }
       </div>
-    })}
-  </div>
+    }
   }
 
   // getTopTracks()
@@ -96,21 +112,21 @@ function App() {
     <div className="App">
       <h1>Welcome</h1>
       {!token ?
-        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a> 
-        
+        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
+
         : <button onClick={logout}>Logout</button>
       }
 
       {
-        token ? 
+        token ?
           <div>
             <button onClick={() => getTopTracks()}>get my top tracks</button>
           </div>
-        : <div>
-
-        </div>
+          : <div>
+            <h3>pls login</h3>
+          </div>
       }
-    {renderTracks()}
+      {renderTracks()}
     </div>
 
   );
