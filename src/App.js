@@ -15,6 +15,7 @@ function App() {
   const [artists, setArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([{}]);
   const [displayTracks, setDisplayTracks] = useState(false);
+  const [topAlbums, setTopAlbums] = useState([{}]);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -26,7 +27,6 @@ function App() {
 
       window.location.hash = "";
       window.localStorage.setItem("token", token)
-      // setDisplayTracks(false)
     }
 
     setToken(token)
@@ -66,11 +66,11 @@ function App() {
 
   const getTopTracks = async () => {
     setDisplayTracks(true)
+
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
-        limit: 5,
-        time_range: 'short_term'
-
+        limit: 50,
+        time_range: 'medium_term'
       },
       headers: {
         'Accept': "application/json",
@@ -78,31 +78,68 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
+
+    const albumData = data.items.map(track => {
+      return track.album
+    });
+
+  // remove all album objects that only occur once 
+    function removeUnique(arr) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        var count = 0;
+        for (var j = 0; j < arr.length; j++) {
+          if (arr[j].name == arr[i].name) {
+            count++;
+          }
+        }
+        if (count >= 2) {
+          newArr.push(arr[i]);
+        }
+      }
+      console.log(newArr)
+        return newArr;
+    }
+
+    const repeatAlbums = removeUnique(albumData);
+    
+    
+    // const filteredAlbums = albumData.map(album => {
+    //   let albumTally = 0;
+
+    //   for (let i = 0; i < albumData.length; i++) {
+    //     if (album.name === albumData[i].name) {
+    //       albumTally++
+    //       console.log(`${album.name} ${albumTally}`)
+    //     }
+    //   }
+    // })
+
     setTopTracks(data.items)
     // console.log(topTracks)
   }
 
   const renderTracks = () => {
-    console.log(topTracks);
+    // console.log(topTracks);
     if (token && displayTracks) {
       return <div id='top-track-display'>
         <h1 id='top5_title'>ur top five</h1>
         {topTracks.map(track => {
           return <div className='track_wrapper' key={track.id}>
- 
+
             <h2 className='track_name'>{track.name}</h2>
             {track.artists ? <p className='track_artist'>{track.artists[0].name}</p> : <p>no artist listed</p>}
-            { track.album ? 
-            <img src={track.album.images[0].url} height={'150px'} width={'150px'}/> 
-              
-            : <p>no image to display</p>
-          }
+            {track.album ?
+              <img src={track.album.images[0].url} height={'150px'} width={'150px'} />
+
+              : <p>no image to display</p>
+            }
 
           </div>
 
-        
+
         })
-      }
+        }
       </div>
     }
   }
@@ -112,21 +149,21 @@ function App() {
   return (
     <div className="App">
       <div className='auth_stuff'>
-      <h1>Welcome</h1>
-      {!token ?
-        <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
+        <h1>Welcome</h1>
+        {!token ?
+          <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
 
-        : <button id='logoutBtn' onClick={logout}>Logout</button>
-      }
-      {
-        token ?
-        <div>
-            <button onClick={() => getTopTracks()}>get my top tracks</button>
-          </div>
-          : <div>
-            <h3>pls login</h3>
-          </div>
-      }
+          : <button id='logoutBtn' onClick={logout}>Logout</button>
+        }
+        {
+          token ?
+            <div>
+              <button onClick={() => getTopTracks()}>get my top tracks</button>
+            </div>
+            : <div>
+              <h3>pls login</h3>
+            </div>
+        }
       </div>
       {renderTracks()}
     </div>
