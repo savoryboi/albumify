@@ -166,7 +166,7 @@ console.log(topAlbumData)
   return (
     <div className="App">
       <div className='auth_stuff'>
-        <h1>Albums Wrapped</h1>
+        <h1>ALBUMS: WRAPPED</h1>
         {!token ?
           <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
 

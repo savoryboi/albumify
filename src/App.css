@@ -16,19 +16,24 @@ html, body {
   padding: 15px 2%;
 }
 div.auth_stuff h1 {
-  color: yellow;
+  color: #FFB8C9;
+  padding: 20px 10px 0px 10px;
 }
 
 
 div.auth_stuff h3, label {
-  color: #EA7691;
+  color: #590015;
   padding: 5px;
 }
 
 #album_list_header {
-  margin: auto;
-  padding: 20px;
-  color: #3B000E;
+  margin:0 auto 20px;
+  background-color: #ffb8c9;
+  padding: 35px;
+  color: black;
+  font-size: 40px;
+  border: 2px solid #CB4665;
+  border-radius: 15px;
 }
 
 .auth_stuff button {
@@ -37,7 +42,7 @@ div.auth_stuff h3, label {
   color: black;
   font-weight: bold;
   padding: 8px 5%;
-  margin: 4px auto;
+  margin: 20px auto;
   transition: .444s;
 }
 
@@ -45,11 +50,12 @@ div.auth_stuff h3, label {
   background-color: #CB4665;
   color: white;
 }
-.divider {
+div.divider {
   height: 1.8px;
-  background-color: white;
+  background-color: #590015;
   width: 100%;
-  margin: 5px 0 2px;
+  margin: 30px 0px;
+
 }
 
 div#top-track-display {
@@ -70,8 +76,12 @@ div#top-track-display {
   font-size: 14px;
 }
 
+.album_wrapper:last-child {
+  margin-bottom: 20px;
+}
+
 .album_name {
-  color: black;
+  color:#FFB8C9 ;
   font-size: 24px;
   /* max-width: 20px; */
   margin-bottom: 3px;
@@ -84,7 +94,7 @@ div#top-track-display {
   margin: 3px;
   padding: 2px 4px;
   font-size: 18px;
-  color:#f189a1 ;
+  color: #000000;
 }
 
 img.album_cover {
