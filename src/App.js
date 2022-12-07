@@ -141,14 +141,15 @@ console.log(topAlbumData)
   const renderTracks = () => {
     if (token && displayTracks) {
       return <div id='top-track-display'>
-        <h1 id='top5_title'>ur top five</h1>
+        <h1 id='album_list_header'>my top albums</h1>
         {topAlbums.map(album => {
           return <div className='album_wrapper' key={album.id}>
-
+            <div className='album_info'>
             <h2 className='album_name'>{album.name}</h2>
             {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
+            </div>
             {album.images ?
-              <img src={album.images[0].url} height={'150px'} width={'150px'} />
+              <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} />
 
               : <p>no image to display</p>
             }
@@ -165,14 +166,16 @@ console.log(topAlbumData)
   return (
     <div className="App">
       <div className='auth_stuff'>
-        <h1>Welcome</h1>
+        <h1>Albums Wrapped</h1>
         {!token ?
-          <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>Login To Spotify</a>
+          <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
 
-          : <button id='logoutBtn' onClick={logout}>Logout</button>
+          : <button id='logoutBtn' onClick={logout}>logout</button>
         }
         {
           token ?
+          <div>
+          <h3>select one of the following time frames:</h3>
             <form id='user_selection'>
               <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
               <label htmlFor={'short_term'}>very recently</label><br/>
@@ -192,9 +195,11 @@ console.log(topAlbumData)
                 get my top albums
                 </button>
             </form>
+            </div>
 
             : <div> <h3>pls login</h3> </div>
         }
+        <div className='divider'></div>
       </div>
       {renderTracks()}
     </div>

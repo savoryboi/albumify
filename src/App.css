@@ -1,34 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+html, body {
+  background-color: #BB2649;
+}
+
 .auth_stuff {
   margin: auto;
   justify-content: center;
   text-align: center;
   padding: 15px 2%;
-  background-color: yellowgreen;
+}
+div.auth_stuff h1 {
+  color: yellow;
 }
 
-#top5_title {
-  padding: 15px;
+
+div.auth_stuff h3, label {
+  color: #EA7691;
+  padding: 5px;
+}
+
+#album_list_header {
+  margin: auto;
+  padding: 20px;
+  color: #3B000E;
 }
 
 .auth_stuff button {
   border: none;
   border-radius: 10px;
-  color: hotpink;
-  font-family: 'Courier New', Courier, monospace;
+  color: black;
   font-weight: bold;
-  padding: 5px 2%;
+  padding: 8px 5%;
   margin: 4px auto;
   transition: .444s;
 }
 
 .auth_stuff button:hover {
-  background-color: hotpink;
+  background-color: #CB4665;
   color: white;
+}
+.divider {
+  height: 1.8px;
+  background-color: white;
+  width: 100%;
+  margin: 5px 0 2px;
 }
 
 div#top-track-display {
   display: flex;
-  max-width: 800px;
+  max-width: 600px;
   flex-direction: column;
   justify-content: center;
   margin: auto;
@@ -36,8 +62,7 @@ div#top-track-display {
 
 .album_wrapper {
   /* justify-content: center; */
-  margin: auto;
-  width: 500px;
+  /* margin: 15px auto; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,13 +71,23 @@ div#top-track-display {
 }
 
 .album_name {
-  color: hotpink;
-  font-size: 14px;
-  max-width: 150px;
+  color: black;
+  font-size: 24px;
+  /* max-width: 20px; */
+  margin-bottom: 3px;
+  padding: 2px 4px;
 }
 
-.track_artist {
-  font-family:'Courier New', Courier, monospace ;
-  font-weight: 600;
+.album_artist {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  font-weight: 300;
+  margin: 3px;
+  padding: 2px 4px;
+  font-size: 18px;
+  color:#f189a1 ;
 }
 
+img.album_cover {
+  border-radius: 10px;
+  padding: 4px;
+}
