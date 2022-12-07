@@ -34,7 +34,7 @@ div#top-track-display {
   margin: auto;
 }
 
-.track_wrapper {
+.album_wrapper {
   /* justify-content: center; */
   margin: auto;
   width: 500px;
@@ -45,7 +45,7 @@ div#top-track-display {
   font-size: 14px;
 }
 
-.track_name {
+.album_name {
   color: hotpink;
   font-size: 14px;
   max-width: 150px;

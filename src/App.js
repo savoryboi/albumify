@@ -11,11 +11,10 @@ function App() {
   const SCOPE = 'user-top-read';
 
   const [token, setToken] = useState("");
-  const [searchKey, setSearchKey] = useState("");
-  const [artists, setArtists] = useState([]);
   const [topTracks, setTopTracks] = useState([{}]);
   const [displayTracks, setDisplayTracks] = useState(false);
   const [topAlbums, setTopAlbums] = useState([{}]);
+  const [timeFrame, setTimeFrame] = useState('medium_term');
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -64,13 +63,15 @@ function App() {
   //   })
   // }
 
-  const getTopTracks = async () => {
+  const getTopTracks = async (time_input) => {
     setDisplayTracks(true)
+    setTimeFrame(time_input);
+
 
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
         limit: 50,
-        time_range: 'medium_term'
+        time_range: `${time_input}` || 'medium_term'
       },
       headers: {
         'Accept': "application/json",
@@ -146,8 +147,8 @@ console.log(topAlbumData)
 
             <h2 className='album_name'>{album.name}</h2>
             {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
-            {album.album ?
-              <img src={album.album.images[0].url} height={'150px'} width={'150px'} />
+            {album.images ?
+              <img src={album.images[0].url} height={'150px'} width={'150px'} />
 
               : <p>no image to display</p>
             }
@@ -172,12 +173,27 @@ console.log(topAlbumData)
         }
         {
           token ?
-            <div>
-              <button onClick={() => getTopTracks()}>get my top tracks</button>
-            </div>
-            : <div>
-              <h3>pls login</h3>
-            </div>
+            <form id='user_selection'>
+              <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
+              <label htmlFor={'short_term'}>very recently</label><br/>
+              <input id={'medium_term'} name={'time_frame'} value={'medium_term'} type={'radio'} />
+              <label htmlFor={'medium_term'}>last chunk of my life</label><br/>
+              <input id={'long_term'} name={'time_frame'} value={'long_term'} type={'radio'} />
+              <label htmlFor={'long_term'}>basically all-time</label><br/>
+              <button onClick={(e) => {
+                e.preventDefault()
+                const formAnswer = document.querySelector('input[name=time_frame]:checked').value;
+
+                console.log(formAnswer)
+
+                getTopTracks(formAnswer)
+                }}>
+                
+                get my top albums
+                </button>
+            </form>
+
+            : <div> <h3>pls login</h3> </div>
         }
       </div>
       {renderTracks()}
