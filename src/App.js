@@ -83,11 +83,12 @@ function App() {
       return track.album
     });
 
-  // remove all album objects that only occur once 
+    // remove all album objects that only occur once 
     function removeUnique(arr) {
       var newArr = [];
       for (var i = 0; i < arr.length; i++) {
         var count = 0;
+        // 2nd for-loop to compare 
         for (var j = 0; j < arr.length; j++) {
           if (arr[j].name == arr[i].name) {
             count++;
@@ -98,39 +99,55 @@ function App() {
         }
       }
       console.log(newArr)
-        return newArr;
+      return newArr;
     }
 
     const repeatAlbums = removeUnique(albumData);
-    
-    
-    // const filteredAlbums = albumData.map(album => {
-    //   let albumTally = 0;
 
-    //   for (let i = 0; i < albumData.length; i++) {
-    //     if (album.name === albumData[i].name) {
-    //       albumTally++
-    //       console.log(`${album.name} ${albumTally}`)
-    //     }
-    //   }
-    // })
+    // isolate album names to more easily count frequency and sort into descending order
+    const repeatAlbumNames = repeatAlbums.map(album => album.name)
+    // console.log(repeatAlbumNames)
 
-    setTopTracks(data.items)
-    // console.log(topTracks)
+    // sorting array by frequency
+    
+    const sortByFrequency = (array) => {
+      var frequency = {};
+      
+      array.forEach(function (value) { frequency[value] = 0; });
+      
+      var uniques = array.filter(function (value) {
+        return ++frequency[value] == 1;
+      });
+      
+      return uniques.sort(function (a, b) {
+        return frequency[b] - frequency[a];
+      });
+    }
+    const albumsByFreq = sortByFrequency(repeatAlbumNames);
+    
+    const topAlbumData = albumsByFreq.map(title => {
+      for(let i = 0; i < repeatAlbums.length; i++) {
+        if(title === repeatAlbums[i].name){
+          return repeatAlbums[i];
+        }
+      }
+    })
+console.log(topAlbumData)
+
+    setTopAlbums(topAlbumData);
   }
 
   const renderTracks = () => {
-    // console.log(topTracks);
     if (token && displayTracks) {
       return <div id='top-track-display'>
         <h1 id='top5_title'>ur top five</h1>
-        {topTracks.map(track => {
-          return <div className='track_wrapper' key={track.id}>
+        {topAlbums.map(album => {
+          return <div className='album_wrapper' key={album.id}>
 
-            <h2 className='track_name'>{track.name}</h2>
-            {track.artists ? <p className='track_artist'>{track.artists[0].name}</p> : <p>no artist listed</p>}
-            {track.album ?
-              <img src={track.album.images[0].url} height={'150px'} width={'150px'} />
+            <h2 className='album_name'>{album.name}</h2>
+            {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
+            {album.album ?
+              <img src={album.album.images[0].url} height={'150px'} width={'150px'} />
 
               : <p>no image to display</p>
             }
@@ -143,8 +160,6 @@ function App() {
       </div>
     }
   }
-
-  // getTopTracks()
 
   return (
     <div className="App">
