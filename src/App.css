@@ -5,43 +5,61 @@
   color: white;
 }
 
-html, body {
+html,
+body {
   background-color: #BB2649;
 }
 
 .auth_stuff {
-  margin: auto;
+  margin: 0 auto;
   justify-content: center;
   text-align: center;
-  padding: 15px 2%;
+  padding: 5px 2%;
 }
+
 div.auth_stuff h1 {
   color: #FFB8C9;
-  padding: 20px 10px 0px 10px;
+  background-image: -webkit-linear-gradient(15deg, #FFB8C9 69%, #ffde5c 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding: 20px 10px 0px;
 }
 
 
-div.auth_stuff h3, label {
+div.auth_stuff h3,
+label {
   color: #590015;
   padding: 5px;
 }
 
-#album_list_header {
+.track_header {
   margin: 0 auto 20px;
   padding: 15px 35px;
-  color: #ffb8c9;
-  font-size: 30px;
+  /* color: #ffb8c9; */
+  font-size: 20px;
   border: 2px solid #CB4665;
   border-radius: 15px;
+  /* text gradient */
+  background-image: -webkit-linear-gradient(45deg, #FFB8C9 35%, #fce567 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  box-shadow: -12px 13px 20px 8px rgba(89, 0, 21, 0.33);
+  -webkit-box-shadow: -12px 13px 20px 8px rgba(89, 0, 21, 0.33);
+  -moz-box-shadow: -12px 13px 20px 8px rgba(89, 0, 21, 0.33);
 }
 
 .auth_stuff button {
   border: none;
   border-radius: 10px;
+  background-color: #EC6484;
   color: black;
   font-weight: bold;
   padding: 8px 5%;
-  margin: 20px auto;
+  margin: 10px auto;
   transition: .444s;
 }
 
@@ -49,11 +67,13 @@ div.auth_stuff h3, label {
   background-color: #CB4665;
   color: white;
 }
+
 div.divider {
   height: 1.8px;
   background-color: #590015;
+  background-image: -webkit-linear-gradient(0deg, #EC6484 40%, #590015 100%);
   width: 100%;
-  margin: 30px 0px;
+  margin: 10px 0px;
 
 }
 
@@ -73,6 +93,11 @@ div#top-track-display {
   align-items: center;
   padding: 2px;
   font-size: 14px;
+  transition: .43s;
+}
+
+.album_wrapper:hover {
+  padding: 50px;
 }
 
 .album_wrapper:last-child {
@@ -80,15 +105,35 @@ div#top-track-display {
 }
 
 .album_name {
-  color:#FFB8C9 ;
+  /* color:#FFB8C9 ; */
   font-size: 24px;
   /* max-width: 20px; */
   margin-bottom: 3px;
   padding: 2px 4px;
 }
 
+div.album_wrapper:nth-child(odd) {
+  background-image: -webkit-linear-gradient(45deg, #FFB8C9 20%, #9fcf35 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+div.album_wrapper:nth-child(even) {
+  /* background-image: -webkit-linear-gradient(45deg,  #9fcf35 0%, #FFB8C9 50%); */
+  background-image: -webkit-linear-gradient(130deg, #FFB8C9 20%, #9fcf35 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
 .album_artist {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 300;
   margin: 3px;
   padding: 2px 4px;
@@ -99,4 +144,7 @@ div#top-track-display {
 img.album_cover {
   border-radius: 10px;
   padding: 4px;
+  box-shadow: -3px 8px 19px 4px rgba(247, 133, 160, 0.33);
+  -webkit-box-shadow: -3px 8px 19px 4px rgba(89, 0, 21, 0.33);
+  -moz-box-shadow: -3px 8px 19px 4px rgba(89, 0, 21, 0.33);
 }

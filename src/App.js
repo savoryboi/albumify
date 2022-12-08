@@ -141,7 +141,10 @@ console.log(topAlbumData)
   const renderTracks = () => {
     if (token && displayTracks) {
       return <div id='top-track-display'>
+        <div className='track_header'>
         <h1 id='album_list_header'>my top albums</h1>
+        <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months': 'of all time' }</h2>
+        </div>
         {topAlbums.map(album => {
           return <div className='album_wrapper' key={album.id}>
             <div className='album_info'>
