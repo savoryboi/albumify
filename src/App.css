@@ -8,6 +8,7 @@
 html,
 body {
   background-color: #BB2649;
+  height: 100%;
 }
 
 .auth_stuff {
@@ -36,17 +37,12 @@ div.login_wrapper {
 
 div.auth_stuff h1 {
   color: #FFB8C9;
-  background-image: -webkit-linear-gradient(15deg, #FFB8C9 69%, #ffde5c 100%);
+  background-image: -webkit-linear-gradient(15deg, #0c0b0b 0%, #ff0066 100%);
   background-clip: text;
   -webkit-background-clip: text;
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
-  padding: 20px 10px 0px;
-}
-
-div.auth_stuff h3 {
-  color:#ffde5c;
-  padding-bottom: 20px;
+  padding: 30px 10px 0px;
 }
 
 div.auth_stuff label {
@@ -56,7 +52,13 @@ div.auth_stuff label {
 }
 
 div.auth_stuff h3 {
-  margin: 50px auto 10px;
+  padding-bottom: 20px;
+  margin: 20px auto 10px;
+  background-image: -webkit-linear-gradient(15deg, #16bb00 0%, #f6c3d8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .auth_stuff form {
@@ -151,7 +153,7 @@ div.divider {
 
 }
 
-div#top-track-display {
+div#top-album-display {
   display: flex;
   max-width: 600px;
   flex-direction: column;

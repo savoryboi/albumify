@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
+
 // import TopTracks from './components/TopTracks';
 
 function App() {
@@ -110,46 +113,46 @@ function App() {
     // console.log(repeatAlbumNames)
 
     // sorting array by frequency
-    
+
     const sortByFrequency = (array) => {
       var frequency = {};
-      
+
       array.forEach(function (value) { frequency[value] = 0; });
-      
+
       var uniques = array.filter(function (value) {
         return ++frequency[value] == 1;
       });
-      
+
       return uniques.sort(function (a, b) {
         return frequency[b] - frequency[a];
       });
     }
     const albumsByFreq = sortByFrequency(repeatAlbumNames);
-    
+
     const topAlbumData = albumsByFreq.map(title => {
-      for(let i = 0; i < repeatAlbums.length; i++) {
-        if(title === repeatAlbums[i].name){
+      for (let i = 0; i < repeatAlbums.length; i++) {
+        if (title === repeatAlbums[i].name) {
           return repeatAlbums[i];
         }
       }
     })
-console.log(topAlbumData)
+    console.log(topAlbumData)
 
     setTopAlbums(topAlbumData);
   }
 
   const renderTracks = () => {
     if (token && displayTracks) {
-      return <div id='top-track-display'>
+      return <div id='top-album-display'>
         <div className='track_header'>
-        <h1 id='album_list_header'>my top albums</h1>
-        <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months': 'of all time' }</h2>
+          <h1 id='album_list_header'>my top albums</h1>
+          <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months' : 'of all time'}</h2>
         </div>
         {topAlbums.map(album => {
           return <div className='album_wrapper' key={album.id}>
             <div className='album_info'>
-            <h2 className='album_name'>{album.name}</h2>
-            {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
+              <h2 className='album_name'>{album.name}</h2>
+              {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
             </div>
             {album.images ?
               <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} />
@@ -166,38 +169,52 @@ console.log(topAlbumData)
     }
   }
 
+  // const downloadImage = async () => {
+  //   var node = document.getElementById('top-album-display');
+
+  //   html2canvas(node, {
+  //     useCORS: true, 
+  //     allowTaint: true, 
+  //     backgroundColor: '#BB2649', 
+  //   })
+  //     .then(function (canvas) {
+  //       document.body.appendChild(canvas)
+  //     })
+  // }
+
   return (
     <div className="App">
       <div className='auth_stuff'>
+        <h1>ALBUMIFY</h1>
         {!token ?
-        <div className='login_wrapper'>
-          <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+          <div className='login_wrapper'>
+            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
         {
           token ?
-          <div>
-          <h3>choose a time frame</h3>
-            <form id='user_selection'>
-              <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
-              <label htmlFor={'short_term'}>4 weeks</label>
-              <input id={'medium_term'} name={'time_frame'} value={'medium_term'} type={'radio'} />
-              <label htmlFor={'medium_term'}>6 months</label>
-              <input id={'long_term'} name={'time_frame'} value={'long_term'} type={'radio'} />
-              <label htmlFor={'long_term'}>all-time</label>
-              <button id='submitBtn' onClick={(e) => {
-                e.preventDefault()
-                const formAnswer = document.querySelector('input[name=time_frame]:checked').value;
+            <div>
+              <h3>choose a time frame</h3>
+              <form id='user_selection'>
+                <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
+                <label htmlFor={'short_term'}>4 weeks</label>
+                <input id={'medium_term'} name={'time_frame'} value={'medium_term'} type={'radio'} />
+                <label htmlFor={'medium_term'}>6 months</label>
+                <input id={'long_term'} name={'time_frame'} value={'long_term'} type={'radio'} />
+                <label htmlFor={'long_term'}>all-time</label>
+                <button id='submitBtn' onClick={(e) => {
+                  e.preventDefault()
+                  const formAnswer = document.querySelector('input[name=time_frame]:checked').value;
 
-                console.log(formAnswer)
+                  console.log(formAnswer)
 
-                getTopTracks(formAnswer)
+                  getTopTracks(formAnswer)
                 }}>
-                
-                SUBMIT
+
+                  SUBMIT
                 </button>
-            </form>
+              </form>
             </div>
 
             : <div></div>
@@ -205,6 +222,7 @@ console.log(topAlbumData)
         <div className='divider'></div>
       </div>
       {renderTracks()}
+      {/* <button onClick={() => downloadImage()}>download image</button> */}
     </div>
 
   );
