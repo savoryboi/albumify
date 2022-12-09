@@ -178,15 +178,15 @@ console.log(topAlbumData)
         {
           token ?
           <div>
-          <h3>select one of the following time frames:</h3>
+          <h3>select a time frame:</h3>
             <form id='user_selection'>
               <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
-              <label htmlFor={'short_term'}>very recently</label><br/>
+              <label htmlFor={'short_term'}>4 weeks</label>
               <input id={'medium_term'} name={'time_frame'} value={'medium_term'} type={'radio'} />
-              <label htmlFor={'medium_term'}>last chunk of my life</label><br/>
+              <label htmlFor={'medium_term'}>6 months</label>
               <input id={'long_term'} name={'time_frame'} value={'long_term'} type={'radio'} />
-              <label htmlFor={'long_term'}>basically all-time</label><br/>
-              <button onClick={(e) => {
+              <label htmlFor={'long_term'}>all-time</label>
+              <button id='submitBtn' onClick={(e) => {
                 e.preventDefault()
                 const formAnswer = document.querySelector('input[name=time_frame]:checked').value;
 
@@ -195,7 +195,7 @@ console.log(topAlbumData)
                 getTopTracks(formAnswer)
                 }}>
                 
-                get my top albums
+                SUBMIT
                 </button>
             </form>
             </div>
