@@ -17,6 +17,23 @@ body {
   padding: 5px 2%;
 }
 
+div.login_wrapper {
+  margin: 50px auto;
+}
+
+.login_wrapper a {
+  text-decoration: none;
+  font-size: 24px;
+  color: #BB2649;
+  font-weight: bold;
+  transition: .5s;
+  background-color: #9fcf35;
+  padding: 15px 4%;
+  border-radius: 20px;
+}
+
+
+
 div.auth_stuff h1 {
   color: #FFB8C9;
   background-image: -webkit-linear-gradient(15deg, #FFB8C9 69%, #ffde5c 100%);
@@ -32,10 +49,11 @@ div.auth_stuff h3,
 label {
   color: #590015;
   padding: 5px;
+  transition: .333s;
 }
 
 div.auth_stuff h3 {
-  margin: 5px auto 10px;
+  margin: 50px auto 10px;
 }
 
 .auth_stuff form {
@@ -43,16 +61,14 @@ div.auth_stuff h3 {
   max-height: 40px;
   align-items: center;
   max-width: 500px;
-  margin: auto;
+  margin: 5px auto;
   justify-content: space-between;
 }
 
 .auth_stuff input[type="radio"] {
   display: none;
-  position: absolute;
   width: 100%;
   appearance: none;
-       transition: all 1s;
 }
 
 input[type="radio"]:checked + label {
@@ -99,11 +115,11 @@ input[type="radio"]:checked + label {
 .auth_stuff button {
   border: none;
   border-radius: 15px;
-  background-color: #fce567;
-  color: black;
+  background-color: #9fcf35;
+  color: #BB2649;
   font-weight: bold;
   padding: 2px 2%;
-  transition: .444s;
+  transition: .333s;
   height: 30px;
 }
 
@@ -114,6 +130,13 @@ input[type="radio"]:checked + label {
 
 button#submitBtn {
   margin: none;
+}
+
+button#logoutBtn {
+  width: 120px;
+  position: absolute;
+  top: 10px;
+  left: 8px;
 }
 
 div.divider {
@@ -134,8 +157,6 @@ div#top-track-display {
 }
 
 .album_wrapper {
-  /* justify-content: center; */
-  /* margin: 15px auto; */
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -169,11 +169,11 @@ console.log(topAlbumData)
   return (
     <div className="App">
       <div className='auth_stuff'>
-        <h1>ALBUMS: WRAPPED</h1>
         {!token ?
+        <div className='login_wrapper'>
           <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
-
-          : <button id='logoutBtn' onClick={logout}>logout</button>
+          </div>
+          : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
         {
           token ?
@@ -200,7 +200,7 @@ console.log(topAlbumData)
             </form>
             </div>
 
-            : <div> <h3>pls login</h3> </div>
+            : <div></div>
         }
         <div className='divider'></div>
       </div>
