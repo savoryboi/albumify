@@ -44,9 +44,12 @@ div.auth_stuff h1 {
   padding: 20px 10px 0px;
 }
 
+div.auth_stuff h3 {
+  color:#ffde5c;
+  padding-bottom: 20px;
+}
 
-div.auth_stuff h3,
-label {
+div.auth_stuff label {
   color: #590015;
   padding: 5px;
   transition: .333s;

@@ -178,7 +178,7 @@ console.log(topAlbumData)
         {
           token ?
           <div>
-          <h3>select a time frame:</h3>
+          <h3>choose a time frame</h3>
             <form id='user_selection'>
               <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
               <label htmlFor={'short_term'}>4 weeks</label>
