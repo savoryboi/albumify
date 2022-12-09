@@ -8,7 +8,7 @@ import { saveAs } from 'file-saver';
 
 function App() {
   const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
-  const REDIRECT_URI = 'http://localhost:3000';
+  const REDIRECT_URI = 'https://imaginative-axolotl-a18101.netlify.app';
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
