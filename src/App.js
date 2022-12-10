@@ -101,7 +101,7 @@ function App() {
     }
     const albumsByFreq = sortByFrequency(repeatAlbumNames);
 
-    const topAlbumData = albumsByFreq.map(title => {
+    const topAlbumData = albumsByFreq.map(function(title) {
       for (let i = 0; i < repeatAlbums.length; i++) {
         if (title === repeatAlbums[i].name) {
           return repeatAlbums[i];
@@ -127,7 +127,7 @@ function App() {
               {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
             </div>
             {album.images ?
-              <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} />
+              <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} alt={album.name} />
 
               : <p>no image to display</p>
             }
