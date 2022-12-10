@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import html2canvas from 'html2canvas';
-import { saveAs } from 'file-saver';
+
 
 // import TopTracks from './components/TopTracks';
 
 function App() {
   const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
-  const REDIRECT_URI = 'https://imaginative-axolotl-a18101.netlify.app' || 'https://localhost:3000';
+  const REDIRECT_URI = 'http://albumify.netlify.app' || 'http://localhost:3000';
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
@@ -20,6 +19,8 @@ function App() {
   const [timeFrame, setTimeFrame] = useState('medium_term');
 
   useEffect(() => {
+    // document.title = 'Albumify';
+
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
@@ -39,32 +40,6 @@ function App() {
     window.localStorage.removeItem('token');
 
   }
-
-  // const searchArtists = async (e) => {
-  //   e.preventDefault()
-  //   const { data } = await axios.get("https://api.spotify.com/v1/search", {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     },
-  //     params: {
-  //       q: searchKey,
-  //       type: "artist", 
-  //       limit: 5
-  //     }
-  //   })
-
-  //   setArtists(data.artists.items)
-  // }
-
-  // const renderArtists = () => {
-  //   console.log(artists)
-  //   return artists.map(artist => {
-
-  //     return <div key={artist.id}>
-  //       {artist.images.length ? <img src={artist.images[0].url} alt={artist.name + " profile image"} /> : <h1>No img</h1>}
-  //     </div>
-  //   })
-  // }
 
   const getTopTracks = async (time_input) => {
     setDisplayTracks(true)
