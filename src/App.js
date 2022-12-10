@@ -101,7 +101,7 @@ function App() {
     }
     const albumsByFreq = sortByFrequency(repeatAlbumNames);
 
-    const topAlbumData = albumsByFreq.map(function(title) {
+    const topAlbumData = albumsByFreq.map((title)=> {
       for (let i = 0; i < repeatAlbums.length; i++) {
         if (title === repeatAlbums[i].name) {
           return repeatAlbums[i];
@@ -110,7 +110,7 @@ function App() {
     })
     console.log(topAlbumData)
 
-    return setTopAlbums(topAlbumData);
+     setTopAlbums(topAlbumData);
   }
 
   const renderTracks = () => {
