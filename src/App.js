@@ -69,7 +69,7 @@ function App() {
         var count = 0;
         // 2nd for-loop to compare 
         for (var j = 0; j < arr.length; j++) {
-          if (arr[j].name == arr[i].name) {
+          if (arr[j].name === arr[i].name) {
             count++;
           }
         }
@@ -95,7 +95,7 @@ function App() {
       array.forEach(function (value) { frequency[value] = 0; });
 
       var uniques = array.filter(function (value) {
-        return ++frequency[value] == 1;
+        return ++frequency[value] === 1;
       });
 
       return uniques.sort(function (a, b) {
