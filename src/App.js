@@ -110,7 +110,7 @@ function App() {
     })
     console.log(topAlbumData)
 
-    setTopAlbums(topAlbumData);
+    return setTopAlbums(topAlbumData);
   }
 
   const renderTracks = () => {
