@@ -13,14 +13,11 @@ function App() {
   const SCOPE = 'user-top-read';
 
   const [token, setToken] = useState("");
-  const [topTracks, setTopTracks] = useState([{}]);
   const [displayTracks, setDisplayTracks] = useState(false);
   const [topAlbums, setTopAlbums] = useState([{}]);
   const [timeFrame, setTimeFrame] = useState('medium_term');
 
   useEffect(() => {
-    // document.title = 'Albumify';
-
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
