@@ -9,6 +9,7 @@ html,
 body {
   background-color: #BB2649;
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 .auth_stuff {
@@ -52,8 +53,8 @@ div.auth_stuff label {
 }
 
 div.auth_stuff h3 {
-  padding-bottom: 20px;
-  margin: 20px auto 10px;
+  padding-bottom: 5px;
+  margin: 10px auto 0px;
   background-image: -webkit-linear-gradient(15deg, #16bb00 0%, #f6c3d8 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -137,12 +138,6 @@ button#submitBtn {
   margin: none;
 }
 
-button#logoutBtn {
-  width: 120px;
-  position: absolute;
-  top: 10px;
-  left: 8px;
-}
 
 div.divider {
   height: 1.8px;

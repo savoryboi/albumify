@@ -17,6 +17,7 @@ function App() {
   const [topAlbums, setTopAlbums] = useState([{}]);
   const [timeFrame, setTimeFrame] = useState('medium_term');
 
+
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
