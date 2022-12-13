@@ -121,6 +121,7 @@ function App() {
     }
     const albumsByFreq = sortByFrequency(repeatAlbumNames);
 
+    // using sorted array of album names to get array of album data objects in that order
     const topAlbumData = albumsByFreq.map((title)=> {
       for (let i = 0; i < repeatAlbums.length; i++) {
         if (title === repeatAlbums[i].name) {
