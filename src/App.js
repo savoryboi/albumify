@@ -6,8 +6,8 @@ import axios from 'axios';
 // import TopTracks from './components/TopTracks';
 
 function App() {
-  // const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
-  const REDIRECT_URI = 'http://albumify.netlify.app' || 'http://localhost:3000';
+  const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
+  const REDIRECT_URI = 'http://localhost:3000';
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
@@ -45,6 +45,19 @@ function App() {
 
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
+        time_range: `${time_input}` || 'medium_term', 
+        limit: 50
+      },
+      headers: {
+        'Accept': "application/json",
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const data2 = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
+      params: {
+        offset: 49,
         limit: 50,
         time_range: `${time_input}` || 'medium_term'
       },
@@ -58,6 +71,13 @@ function App() {
     const albumData = data.items.map(track => {
       return track.album
     });
+
+    const albumData2 = data2.data.items.map(track => {
+      return track.album
+    });
+
+    const allAlbumData = albumData.concat(albumData2)
+    console.log(allAlbumData);
 
     // remove all album objects that only occur once 
     function removeUnique(arr) {
@@ -74,11 +94,11 @@ function App() {
           newArr.push(arr[i]);
         }
       }
-      console.log(newArr)
+      // console.log(newArr)
       return newArr;
     }
 
-    const repeatAlbums = removeUnique(albumData);
+    const repeatAlbums = removeUnique(allAlbumData);
 
     // isolate album names to more easily count frequency and sort into descending order
     const repeatAlbumNames = repeatAlbums.map(album => album.name)
@@ -108,7 +128,7 @@ function App() {
         }
       }
     })
-    console.log(topAlbumData)
+    // console.log(topAlbumData)
 
      setTopAlbums(topAlbumData);
   }
@@ -160,7 +180,7 @@ function App() {
         <h1>ALBUMIFY</h1>
         {!token ?
           <div className='login_wrapper'>
-            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
