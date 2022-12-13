@@ -69,15 +69,17 @@ function App() {
     })
 
     const albumData = data.items.map(track => {
-      return track.album
+        return track.album;
     });
 
     const albumData2 = data2.data.items.map(track => {
-      return track.album
+        return track.album;
     });
 
-    const allAlbumData = albumData.concat(albumData2)
-    console.log(allAlbumData);
+    const allUnfilteredAlbumData = albumData.concat(albumData2);
+    console.log(allUnfilteredAlbumData);
+
+    const allAlbumData = allUnfilteredAlbumData.filter(obj => {return obj.album_type === "ALBUM"})
 
     // remove all album objects that only occur once 
     function removeUnique(arr) {
@@ -94,7 +96,7 @@ function App() {
           newArr.push(arr[i]);
         }
       }
-      // console.log(newArr)
+      console.log(newArr)
       return newArr;
     }
 
