@@ -6,8 +6,7 @@ import axios from 'axios';
 // import TopTracks from './components/TopTracks';
 
 function App() {
-  const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
-  const REDIRECT_URI = 'http://localhost:3000';
+
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
@@ -171,7 +170,7 @@ function App() {
         <h1>ALBUMIFY</h1>
         {!token ?
           <div className='login_wrapper'>
-            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
