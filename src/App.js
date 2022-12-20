@@ -55,7 +55,8 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
-
+    
+    // second api request to pull next set of user top tracks. making total 100 tracks to analyze and find common album tracks
     const data2 = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
         offset: 49,
@@ -77,12 +78,13 @@ function App() {
         return track.album;
     });
 
+    // concatinate the two arrays of album data from separate api reqs
     const allUnfilteredAlbumData = albumData.concat(albumData2);
-    console.log(allUnfilteredAlbumData);
-
+    
+    // filter array of 100 tracks so only those that are ALBUMS (not singles or EPs) remain 
     const allAlbumData = allUnfilteredAlbumData.filter(obj => {return obj.album_type === "ALBUM"})
 
-    // remove all album objects that only occur once 
+    // remove all album objects that only occur once ... AKA remove all albums that clearly only have one good song lmao
     function removeUnique(arr) {
       var newArr = [];
       for (var i = 0; i < arr.length; i++) {
@@ -93,11 +95,11 @@ function App() {
             count++;
           }
         }
-        if (count >= 2) {
+        if (count >= 3) {
           newArr.push(arr[i]);
         }
       }
-      console.log(newArr)
+      // console.log(newArr)
       return newArr;
     }
 
@@ -105,10 +107,8 @@ function App() {
 
     // isolate album names to more easily count frequency and sort into descending order
     const repeatAlbumNames = repeatAlbums.map(album => album.name)
-    // console.log(repeatAlbumNames)
 
-    // sorting array by frequency
-
+    // sorting array of album names by frequency
     const sortByFrequency = (array) => {
       var frequency = {};
 
@@ -165,19 +165,6 @@ function App() {
     }
   }
 
-  // const downloadImage = async () => {
-  //   var node = document.getElementById('top-album-display');
-
-  //   html2canvas(node, {
-  //     useCORS: true, 
-  //     allowTaint: true, 
-  //     backgroundColor: '#BB2649', 
-  //   })
-  //     .then(function (canvas) {
-  //       document.body.appendChild(canvas)
-  //     })
-  // }
-
   return (
     <div className="App">
       <div className='auth_stuff'>
@@ -218,7 +205,6 @@ function App() {
         <div className='divider'></div>
       </div>
       {renderTracks()}
-      {/* <button onClick={() => downloadImage()}>download image</button> */}
     </div>
 
   );
