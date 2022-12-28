@@ -11,6 +11,8 @@ function App() {
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
+  const CLIENT_ID = process.env.CLIENT_ID;
+  const REDIRECT_URI = process.env.REDIRECT_URI;
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);
@@ -171,7 +173,7 @@ function App() {
         <h1>ALBUMIFY</h1>
         {!token ?
           <div className='login_wrapper'>
-            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID || '6511dcedebcb42eeb0e01b7057db1b12'}&redirect_uri=${process.env.REDIRECT_URI || 'http://localhost:3000/'}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
