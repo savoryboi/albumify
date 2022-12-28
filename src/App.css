@@ -169,10 +169,6 @@ div#top-album-display {
   max-width: 250px;
 }
 
-.album_wrapper:hover {
-  padding: 50px;
-}
-
 .album_wrapper:last-child {
   margin-bottom: 20px;
 }
@@ -220,4 +216,11 @@ img.album_cover {
   box-shadow: -1px 3px 30px 2px rgba(247, 133, 160, 0.33);
   -webkit-box-shadow: -1px 3px 30px 2px rgba(89, 0, 21, 0.33);
   -moz-box-shadow: -1px 3px 30px 2px rgba(89, 0, 21, 0.33);
+}
+
+
+@media screen and (min-width: 600px) {
+  .album_wrapper:hover {
+    padding: 50px;
+  }
 }

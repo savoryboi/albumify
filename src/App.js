@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
 
-
-
-// import TopTracks from './components/TopTracks';
-
 function App() {
 
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
