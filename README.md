@@ -5,6 +5,20 @@ This front-end application uses Spotify's Web API to analyze user's top 100 trac
 
 IMPORTANT: Currently, Albumify requires users to manually be given access to the application via the Spotify Developer Dashboard. If you would like access, please DM on twitter @savorycode.
 
+## USER STORY
+```
+AS A USER I want to view my top albums on Spotify for different time frames
+WHEN I open the application
+THEN I am prompted to login with my spotify account
+WHEN I login to Spotify
+THEN I am redirected to the application and presented with the prompts for time frame
+WHEN I select a time frame and click the button
+THEN I am presented with a list of my top albums for that time frame in descending order
+WHEN I click the logout button
+THEN I am logged out and the list of albums disappears
+
+```
+
 ## LINK TO DEPLOYED APPLICATION
 [GO TO ALBUMIFY!](https://albumify.netlify.app/)
 ```
