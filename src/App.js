@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 
 
+
 // import TopTracks from './components/TopTracks';
 
 function App() {
@@ -170,7 +171,7 @@ function App() {
         <h1>ALBUMIFY</h1>
         {!token ?
           <div className='login_wrapper'>
-            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI || 'localhost:3000'} &scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+            <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID || '6511dcedebcb42eeb0e01b7057db1b12'}&redirect_uri=${process.env.REDIRECT_URI || 'http://localhost:3000/'}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
