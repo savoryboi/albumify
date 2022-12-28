@@ -25,5 +25,6 @@ Dummy login info:
 Andy Bjerk is the sole creator of this application. 
 * You can follow/contact me on [Twitter](http://twitter.com/savorycode)
 * Check out my [portfolio](https://savoryboi.github.io/react-portfolio)
+* Find me on [LinkedIn](https://linkedin.com/in/andy-bjerk/)
 
  
