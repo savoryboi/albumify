@@ -82,9 +82,12 @@ input[type="radio"]:checked + label {
   color: #FFB8C9;
   animation-name: blink;
   animation-duration: 1s;
-  box-shadow: 0px 3px 20px 3px #fce567;
+  /* box-shadow: 0px 3px 20px 3px #fce567;
   -webkit-box-shadow: 0px 3px 20px 3px #fce567;
-  -moz-box-shadow: 0px 3px 20px 3px #fce567;
+  -moz-box-shadow: 0px 3px 20px 3px #fce567; */
+  box-shadow: 0px 0px 90px 50px #ffffa5;
+  -webkit-box-shadow: 0px 0px 90px 50px #ffffa5;
+  -moz-box-shadow: 0px 0px 90px 50px #ffffa5;
 }
 
 .auth_stuff label {
