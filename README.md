@@ -21,11 +21,6 @@ THEN I am logged out and the list of albums disappears
 
 ## LINK TO DEPLOYED APPLICATION
 [GO TO ALBUMIFY!](https://albumify.netlify.app/)
-```
-Dummy login info: 
-* EMAIL: albumify.test@gmail.com
-* PASSWORD: albumifytest123
-```
 
 ## TECHNOLOGIES USED
     * React (create-react-app)
@@ -34,6 +29,7 @@ Dummy login info:
 
 ## DEMO 
 ![demo gif](./public/assets/albumify_demo.GIF)
+Watch a video demo [HERE](https://tinyurl.com/2hn45d5j)
 
 ## MEET THE DEVELOPER
 Andy Bjerk is the sole creator of this application. 
