@@ -91,14 +91,14 @@ input[type="radio"]:checked + label {
 }
 
 .auth_stuff label {
-  background-image: -webkit-linear-gradient(15deg, #FFB8C9 23%, #EC6484 100%);
-  border: none;
-  border-radius: 15px;
+  /* background-image: -webkit-linear-gradient(15deg, #FFB8C9 23%, #EC6484 100%); */
+  border: 1.3px solid #EC6484;
+  border-radius: 7px;
   font-size: 15px;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: bold;
   align-items: center;
-  width: 80px;
+  width: 32%;
   height: 30px;
   color: #590015;
 }
