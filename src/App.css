@@ -13,14 +13,14 @@ body {
 }
 
 .auth_stuff {
-  margin: 0 auto;
+  margin: auto;
   justify-content: center;
   text-align: center;
   padding: 5px 2%;
 }
 
 div.login_wrapper {
-  margin: 50px auto;
+  margin: 20% auto;
 }
 
 .login_wrapper a {
@@ -137,19 +137,15 @@ input[type="radio"]:checked + label {
   color: white;
 }
 
-button#submitBtn {
-  margin: none;
-}
 
-
-div.divider {
+/* div.divider {
   height: 1.8px;
   background-color: #590015;
   background-image: -webkit-linear-gradient(0deg, #EC6484 40%, #590015 100%);
   width: 100%;
   margin: 10px 0px;
 
-}
+} */
 
 div#top-album-display {
   display: flex;
