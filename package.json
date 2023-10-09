@@ -17,7 +17,7 @@
     "file-saver": "^2.0.5",
     "gh-pages": "^4.0.0",
     "html2canvas": "^1.4.1",
-    "netlify": "^13.1.0",
+    "netlify": "^13.1.10",
     "os-browserify": "^0.3.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
