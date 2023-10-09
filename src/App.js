@@ -10,7 +10,7 @@ function App() {
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
-  const CLIENT_ID = process.env.CLIENT_ID;
+  const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
   const REDIRECT_URI = 'https://albumify.netlify.app';
 
   const [token, setToken] = useState("");
@@ -157,22 +157,20 @@ function App() {
           <h1 id='album_list_header'>my top albums</h1>
           <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months' : 'of all time'}</h2>
         </div>
+       
         {topAlbums.map(album => {
-          console.log(album)
-          return <a href={album.external_urls.spotify} target='_blank' key={album.id}>
-            <div className='album_wrapper' key={album.id}>
+
+          return <div className='album_wrapper' key={album.id}>
             <div className='album_info'>
               <h2 className='album_name'>{album.name}</h2>
               {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
             </div>
             {album.images ?
               <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} alt={album.name} />
-
+              
               : <div></div> // placeholder
             }
-
           </div>
-          </a>
 
         })
         }
