@@ -38,12 +38,8 @@ div.login_wrapper {
 
 div.auth_stuff h1 {
   color: #FFB8C9;
-  background-image: -webkit-linear-gradient(15deg, #0c0b0b 0%, #fa86b5 70%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
   padding: 40px 10px 0px;
+  font-size: 60px;
 }
 
 div.auth_stuff label {

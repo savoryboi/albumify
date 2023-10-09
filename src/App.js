@@ -166,7 +166,7 @@ function App() {
             {album.images ?
               <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} alt={album.name} />
 
-              : <p>no image to display</p>
+              : <div></div> // placeholder
             }
 
           </div>
