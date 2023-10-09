@@ -158,7 +158,9 @@ function App() {
           <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months' : 'of all time'}</h2>
         </div>
         {topAlbums.map(album => {
-          return <div className='album_wrapper' key={album.id}>
+          console.log(album)
+          return <a href={album.external_urls.spotify} target='_blank' key={album.id}>
+            <div className='album_wrapper' key={album.id}>
             <div className='album_info'>
               <h2 className='album_name'>{album.name}</h2>
               {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
@@ -170,7 +172,7 @@ function App() {
             }
 
           </div>
-
+          </a>
 
         })
         }

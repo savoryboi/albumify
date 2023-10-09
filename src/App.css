@@ -160,6 +160,10 @@ div#top-album-display {
   font-size: 14px;
   transition: .43s;
 }
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
+}
 
 .album_wrapper h2 {
   max-width: 250px;
