@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 function App() {
 
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
-  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+  const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
+  const REDIRECT_URI = 'http://localhost:3000'
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);
   const [topAlbums, setTopAlbums] = useState([{}]);
-  const [timeFrame, setTimeFrame] = useState('medium_term');
+  const [timeFrame, setTimeFrame] = useState('');
 
 
   useEffect(() => {
@@ -41,6 +41,7 @@ function App() {
   }
 
   const getTopTracks = async (time_input) => {
+    console.log(`Fetching top tracks for time frame: ${time_input}`);
     setDisplayTracks(true)
     setTimeFrame(time_input);
 
@@ -70,11 +71,11 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
-
+ // extract album data from each song 
     const albumData = data.items.map(track => {
         return track.album;
     });
-
+// repeating above step to gather larger dataset
     const albumData2 = data2.data.items.map(track => {
         return track.album;
     });
@@ -138,6 +139,17 @@ function App() {
      setTopAlbums(topAlbumData);
   }
 
+  const handleRadioChange = (e) => {
+    setTimeFrame(e.target.value);
+    console.log('changed')
+    handleSubmit(e.target.value)
+  }
+
+  const handleSubmit = (timeFrame) => {
+
+    getTopTracks(timeFrame)
+  }
+
   const renderTracks = () => {
     if (token && displayTracks) {
       return <div id='top-album-display'>
@@ -180,24 +192,31 @@ function App() {
           token ?
             <div>
               <h3>choose a time frame</h3>
-              <form id='user_selection'>
-                <input id={'short_term'} name={'time_frame'} value={'short_term'} type={'radio'} />
+              <form id='user_selection' onSubmit={handleSubmit}>
+                <input 
+                  id={'short_term'} 
+                  name={'time_frame'} 
+                  value={'short_term'} 
+                  type={'radio'} 
+                  onClick={handleRadioChange}
+                  />
                 <label htmlFor={'short_term'}>4 weeks</label>
-                <input id={'medium_term'} name={'time_frame'} value={'medium_term'} type={'radio'} />
+                <input 
+                  id={'medium_term'} 
+                  name={'time_frame'} 
+                  value={'medium_term'} 
+                  type={'radio'} 
+                  onClick={handleRadioChange} 
+                  />
                 <label htmlFor={'medium_term'}>6 months</label>
-                <input id={'long_term'} name={'time_frame'} value={'long_term'} type={'radio'} />
+                <input 
+                  id={'long_term'} 
+                  name={'time_frame'} 
+                  value={'long_term'} 
+                  type={'radio'} 
+                  onClick={handleRadioChange}
+                  />
                 <label htmlFor={'long_term'}>all-time</label>
-                <button id='submitBtn' onClick={(e) => {
-                  e.preventDefault()
-                  const formAnswer = document.querySelector('input[name=time_frame]:checked').value;
-
-                  console.log(formAnswer)
-
-                  getTopTracks(formAnswer)
-                }}>
-
-                  SUBMIT
-                </button>
               </form>
             </div>
 
