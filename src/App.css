@@ -35,7 +35,6 @@ div.login_wrapper {
 }
 
 
-
 div.auth_stuff h1 {
   color: #FFB8C9;
   padding: 40px 10px 0px;
@@ -74,7 +73,18 @@ div.auth_stuff h3 {
   height: 100%;
 }
 
-input[type="radio"]:checked + label {
+div#warning_wrapper {
+  margin: 10%;
+  color: black;
+}
+
+div#warning_wrapper button {
+  margin: 1em;
+  font-size: medium;
+
+}
+
+input[type="radio"]:checked+label {
   background: #BB2649;
   color: #FFB8C9;
   animation-name: blink;
@@ -92,7 +102,7 @@ input[type="radio"]:checked + label {
   border: 1.3px solid #EC6484;
   border-radius: 7px;
   font-size: 20px;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: bold;
   align-items: center;
   width: 32%;
@@ -152,15 +162,46 @@ div#top-album-display {
   margin: auto;
 }
 
+div.album_container {
+  transition: .25s;
+  border: #ec8ca3 solid 1.5px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.album_tracks {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding: 5px 25px;
+  text-align: right;
+}
+
+.album_tracks h2 {
+  font-style: italic;
+}
+
+.album_tracks h3 {
+  font-size: small;
+}
+
+div.album_container:hover {
+  box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+  -webkit-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+  -moz-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+}
+
 .album_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px;
   font-size: 14px;
-  transition: .43s;
+
 }
-a, a:hover, a:focus, a:active {
+
+a,
+a:hover,
+a:focus,
+a:active {
   text-decoration: none;
   color: inherit;
 }
@@ -181,7 +222,7 @@ a, a:hover, a:focus, a:active {
   padding: 2px 4px;
 }
 
-div.album_wrapper:nth-child(odd) {
+div.album_container:nth-child(odd) {
   background-image: -webkit-linear-gradient(45deg, #FFB8C9 20%, #9fcf35 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -191,8 +232,7 @@ div.album_wrapper:nth-child(odd) {
 
 
 
-div.album_wrapper:nth-child(even) {
-  /* background-image: -webkit-linear-gradient(45deg,  #9fcf35 0%, #FFB8C9 50%); */
+div.album_container:nth-child(even) {
   background-image: -webkit-linear-gradient(130deg, #FFB8C9 20%, #9fcf35 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -216,11 +256,4 @@ img.album_cover {
   box-shadow: -1px 3px 30px 2px rgba(247, 133, 160, 0.33);
   -webkit-box-shadow: -1px 3px 30px 2px rgba(89, 0, 21, 0.33);
   -moz-box-shadow: -1px 3px 30px 2px rgba(89, 0, 21, 0.33);
-}
-
-
-@media screen and (min-width: 600px) {
-  .album_wrapper:hover {
-    padding: 50px;
-  }
 }

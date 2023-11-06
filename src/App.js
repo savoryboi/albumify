@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import EmailButton from './components/EmailButton';
+import Album from './components/Album';
 // import dotenv from 'dotenv';
 
 // dotenv.config();
@@ -12,11 +14,15 @@ function App() {
   const SCOPE = 'user-top-read';
   const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
   const REDIRECT_URI = 'https://albumify.netlify.app';
+  // const REDIRECT_URI = 'http://localhost:3000';
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);
   const [topAlbums, setTopAlbums] = useState([{}]);
   const [timeFrame, setTimeFrame] = useState('');
+  const [albumTracks, setAlbumTracks] = useState([]);
+
+
 
 
   useEffect(() => {
@@ -24,8 +30,7 @@ function App() {
     let token = window.localStorage.getItem("token");
 
     if (!token && hash) {
-      token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1]
-      console.log(token)
+      token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1];
 
       window.location.hash = "";
       window.localStorage.setItem("token", token)
@@ -48,7 +53,7 @@ function App() {
 
     const { data } = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
-        time_range: `${time_input}` || 'medium_term', 
+        time_range: `${time_input}` || 'medium_term',
         limit: 50
       },
       headers: {
@@ -57,7 +62,7 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
-    
+
     // second api request to pull next set of user top tracks. making total 100 tracks to analyze and find common album tracks
     const data2 = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
       params: {
@@ -71,20 +76,28 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     })
- // extract album data from each song 
+
+    // get top tracks 
+    const trackData = data.items;
+    const trackData2 = data2.data.items;
+    const allTopTracks = trackData.concat(trackData2);
+
+
+
+    // extract album data from each song 
     const albumData = data.items.map(track => {
-        return track.album;
+      return track.album;
     });
-// repeating above step to gather larger dataset
+    // repeating above step to gather larger dataset
     const albumData2 = data2.data.items.map(track => {
-        return track.album;
+      return track.album;
     });
 
     // concatinate the two arrays of album data from separate api reqs
     const allUnfilteredAlbumData = albumData.concat(albumData2);
-    
+
     // filter array of 100 tracks so only those that are ALBUMS (not singles or EPs) remain 
-    const allAlbumData = allUnfilteredAlbumData.filter(obj => {return obj.album_type === "ALBUM"})
+    const allAlbumData = allUnfilteredAlbumData.filter(obj => { return obj.album_type === "ALBUM" });
 
     // remove all album objects that only occur once ... AKA remove all albums that clearly only have one good song lmao
     function removeUnique(arr) {
@@ -104,6 +117,8 @@ function App() {
       // console.log(newArr)
       return newArr;
     }
+
+
 
     const repeatAlbums = removeUnique(allAlbumData);
 
@@ -127,16 +142,16 @@ function App() {
     const albumsByFreq = sortByFrequency(repeatAlbumNames);
 
     // using sorted array of album names to get array of album data objects in that order
-    const topAlbumData = albumsByFreq.map((title)=> {
+    const topAlbumData = albumsByFreq.map((title) => {
       for (let i = 0; i < repeatAlbums.length; i++) {
         if (title === repeatAlbums[i].name) {
           return repeatAlbums[i];
         }
       }
     })
-    // console.log(topAlbumData)
 
-     setTopAlbums(topAlbumData);
+    setTopAlbums(topAlbumData);
+    setAlbumTracks(allTopTracks);
   }
 
   const handleRadioChange = (e) => {
@@ -150,27 +165,19 @@ function App() {
     getTopTracks(timeFrame)
   }
 
+
+
   const renderTracks = () => {
+
     if (token && displayTracks) {
       return <div id='top-album-display'>
         <div className='track_header'>
           <h1 id='album_list_header'>my top albums</h1>
           <h2 id='time_display'>{timeFrame === 'short_term' ? 'this month' : timeFrame === 'medium_term' ? 'last 6 months' : 'of all time'}</h2>
         </div>
-       
-        {topAlbums.map(album => {
 
-          return <div className='album_wrapper' key={album.id}>
-            <div className='album_info'>
-              <h2 className='album_name'>{album.name}</h2>
-              {album.artists ? <p className='album_artist'>{album.artists[0].name}</p> : <p>no artist listed</p>}
-            </div>
-            {album.images ?
-              <img className='album_cover' src={album.images[0].url} height={'120px'} width={'120px'} alt={album.name} />
-              
-              : <div></div> // placeholder
-            }
-          </div>
+        {topAlbums.map(album => {
+          return <Album album={album} allTopTracks={albumTracks} key={album.id} />
 
         })
         }
@@ -185,37 +192,41 @@ function App() {
         {!token ?
           <div className='login_wrapper'>
             <a id='loginLink' href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}&response_type=${RESPONSE_TYPE}&show_dialogue=true`}>login to spotify</a>
+            <div id='warning_wrapper'>
+              <h3 id='login_warning'>due to API restrictions, this application is only available to those given permission manually by the developer.</h3>
+              <EmailButton></EmailButton>
+            </div>
           </div>
           : <button id='logoutBtn' onClick={logout}>LOGOUT</button>
         }
         {
           token ?
             <div>
-              <h3>choose a time frame</h3>
+              <h3>choose a time frame, click to see most played tracks</h3>
               <form id='user_selection' onSubmit={handleSubmit}>
-                <input 
-                  id={'short_term'} 
-                  name={'time_frame'} 
-                  value={'short_term'} 
-                  type={'radio'} 
+                <input
+                  id={'short_term'}
+                  name={'time_frame'}
+                  value={'short_term'}
+                  type={'radio'}
                   onClick={handleRadioChange}
-                  />
+                />
                 <label htmlFor={'short_term'}>4 weeks</label>
-                <input 
-                  id={'medium_term'} 
-                  name={'time_frame'} 
-                  value={'medium_term'} 
-                  type={'radio'} 
-                  onClick={handleRadioChange} 
-                  />
-                <label htmlFor={'medium_term'}>6 months</label>
-                <input 
-                  id={'long_term'} 
-                  name={'time_frame'} 
-                  value={'long_term'} 
-                  type={'radio'} 
+                <input
+                  id={'medium_term'}
+                  name={'time_frame'}
+                  value={'medium_term'}
+                  type={'radio'}
                   onClick={handleRadioChange}
-                  />
+                />
+                <label htmlFor={'medium_term'}>6 months</label>
+                <input
+                  id={'long_term'}
+                  name={'time_frame'}
+                  value={'long_term'}
+                  type={'radio'}
+                  onClick={handleRadioChange}
+                />
                 <label htmlFor={'long_term'}>all-time</label>
               </form>
             </div>
