@@ -260,5 +260,13 @@ img.album_cover {
     -webkit-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
     -moz-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
   }
-  
+
+}
+
+@media screen and (max-width: 460px) {
+  div.album_container::after {
+    box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+    -webkit-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+    -moz-box-shadow: 2px -3px 76px 10px #f6f6f459 inset;
+  }
 }
