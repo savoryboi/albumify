@@ -29,7 +29,7 @@ THEN I am logged out and the list of albums disappears
 
 ## DEMO 
 ![demo gif](./public/assets/albumify_demo.GIF)
-Watch a video demo [HERE](https://tinyurl.com/2hn45d5j)
+Watch a video demo [HERE](https://drive.google.com/file/d/1cb6_vZFoI9MO6qyoDU3TaTwnK8FdLnau/view)
 
 ## MEET THE DEVELOPER
 Andy Bjerk is the sole creator of this application. 
