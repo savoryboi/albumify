@@ -12,9 +12,8 @@ function App() {
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
-  const CLIENT_ID = '6511dcedebcb42eeb0e01b7057db1b12';
-  const REDIRECT_URI = 'https://albumify.netlify.app';
-  // const REDIRECT_URI = 'http://localhost:3000';
+  const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+  const REDIRECT_URI = 'http://localhost:3000';
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);
@@ -28,7 +27,7 @@ function App() {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-
+    console.log(CLIENT_ID);
     if (!token && hash) {
       token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1];
 
