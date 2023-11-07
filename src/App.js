@@ -21,7 +21,7 @@ function App() {
   const [displayTracks, setDisplayTracks] = useState(false);
   const [topAlbums, setTopAlbums] = useState([{}]);
   const [timeFrame, setTimeFrame] = useState('');
-  const [albumTracks, setAlbumTracks] = useState([]);
+  const [topTracks, setTopTracks] = useState([]);
 
 
 
@@ -152,7 +152,7 @@ function App() {
     })
 
     setTopAlbums(topAlbumData);
-    setAlbumTracks(allTopTracks);
+    setTopTracks(allTopTracks);
   }
 
   const handleRadioChange = (e) => {
@@ -178,7 +178,7 @@ function App() {
         </div>
 
         {topAlbums.map(album => {
-          return <Album album={album} allTopTracks={albumTracks} key={album.id} />
+          return <Album album={album} allTopTracks={topTracks} key={album.id} />
 
         })
         }
