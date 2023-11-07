@@ -3,9 +3,6 @@ import './App.css';
 import axios from 'axios';
 import EmailButton from './components/EmailButton';
 import Album from './components/Album';
-// import dotenv from 'dotenv';
-
-// dotenv.config();
 
 function App() {
 
@@ -13,7 +10,12 @@ function App() {
   const RESPONSE_TYPE = 'token';
   const SCOPE = 'user-top-read';
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-  const REDIRECT_URI = 'http://localhost:3000';
+
+  // easy access to dev redirect uri
+  // const REDIRECT_URI = 'http://localhost:3000';
+
+  // producion redirec uri
+  const REDIRECT_URI = 'https://albumify.netlify.app';
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);
@@ -27,7 +29,7 @@ function App() {
   useEffect(() => {
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-    console.log(CLIENT_ID);
+
     if (!token && hash) {
       token = hash.substring(1).split('&').find(elem => elem.startsWith('access_token')).split('=')[1];
 

@@ -181,7 +181,8 @@ div.album_container {
 }
 
 .album_tracks h3 {
-  font-size: small;
+  font-size: 1em;
+  font-style: italic;
 }
 
 
@@ -239,10 +240,10 @@ div.album_container:nth-child(even) {
 
 .album_artist {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   margin: 3px;
   padding: 2px 4px;
-  font-size: 18px;
+  font-size: 20px;
   color: #000000;
 }
 
