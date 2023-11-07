@@ -12,10 +12,10 @@ function App() {
   const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
   // easy access to dev redirect uri
-  // const REDIRECT_URI = 'http://localhost:3000';
+  const REDIRECT_URI = 'http://localhost:3000';
 
   // producion redirec uri
-  const REDIRECT_URI = 'https://albumify.netlify.app';
+  // const REDIRECT_URI = 'https://albumify.netlify.app';
 
   const [token, setToken] = useState("");
   const [displayTracks, setDisplayTracks] = useState(false);

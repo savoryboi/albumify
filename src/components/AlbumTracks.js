@@ -4,13 +4,14 @@ function AlbumTracks({ album, allTopTracks }) {
     let topAlbumTracks = [];
 
     allTopTracks.forEach(t => {
-        if(t.album.id === album.id){
+        if(t.album.id === album.id && !topAlbumTracks.some(track => track.id === t.id)){
             topAlbumTracks.push(t)
         }
     })
 
     const trackArr = [... new Set(topAlbumTracks)];
-    console.log(trackArr)
+    console.log(trackArr);
+
     return (<div className="album_tracks">
         <h2>most played:</h2>
         {trackArr.map(track => {
